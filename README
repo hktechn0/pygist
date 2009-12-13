@@ -1,0 +1,14 @@
+pygist
+- gist upload script
+- Hirotaka Kawata <info@techno-st.net>
+- http://www.techno-st.net/pygist
+
+setup:
+cp gist_conf.py.sample gist_conf.py
+edit gist_conf.py...
+
+usage:
+python pygist.py [filename]
+  or
+ln -s pygist.py /usr/local/bin/gist
+gist [filename]
