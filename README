@@ -8,7 +8,7 @@ cp gist_conf.py.sample gist_conf.py
 edit gist_conf.py...
 
 usage:
-python pygist.py [filename]
+python pygist.py [filename ...]
   or
 ln -s /path/to/pygist.py /usr/local/bin/gist
-gist [filename]
+gist [filename ...]
