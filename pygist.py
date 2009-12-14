@@ -20,6 +20,26 @@ class gist():
         post = urllib.urlencode(data)
         urllib2.urlopen(self.gisturl, post)
 
+    def multiupload(self, contents):
+        data = {
+            "login" : self.login,
+            "token" : self.token,
+            }
+
+        if isinstance(contents, dict):
+            contents = contents.items()
+
+        i = 1
+        for f in contents:
+            p = "[gistfile%d]" % i
+            data["file_ext" + p] = ""
+            data["file_name" + p] = f[0]
+            data["file_contents" + p] = f[1]
+            i += 1
+
+        post = urllib.urlencode(data)
+        urllib2.urlopen(self.gisturl, post)
+
 if __name__ == "__main__":
     import sys
     import os.path
@@ -27,15 +47,23 @@ if __name__ == "__main__":
     from gist_conf import *
     
     if len(sys.argv) > 1:
-        f = os.path.abspath(sys.argv[1])
-        name = os.path.basename(f)
+        print 'gist: upload'
 
-        fp = open(f)
-        txt = fp.read()
-        fp.close()
+        contents = []
+        for args in sys.argv[1:]:
+            f = os.path.abspath(args)
+            name = os.path.basename(f)
+            print "> %s" % name,
+            
+            fp = open(f)
+            txt = fp.read()
+            fp.close()
 
+            contents.append((name, txt))
+            print "."
+            
         g = gist(username, apitoken)
-        g.upload(txt, name)
-        print 'gist: upload "%s"' % name
+        g.multiupload(contents)
+        print "done."
     else:
         print "gist: no input files"
