@@ -1,11 +1,13 @@
 pygist
-- gist upload script
+- gist create script
 - Hirotaka Kawata <info@techno-st.net>
 - http://www.techno-st.net/wiki/pygist
 
 setup:
-cp gist_conf.py.sample gist_conf.py
-edit gist_conf.py...
+You should set github API token.
+github => Account Settings => Administrative Information
+$ git config --global github.user `Username`
+$ git config --global github.token `API Token`
 
 usage:
 python pygist.py [filename ...]
